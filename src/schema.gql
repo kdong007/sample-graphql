@@ -1,0 +1,31 @@
+type Name {
+    firstName: String
+    lastName: String
+    fullName: String
+}
+
+# root query, case sensitivy
+type Query {
+    """
+    root query operation
+    """
+    hello: String
+
+    """
+    test
+    """
+    time: String
+
+    getName: Name
+}
+
+# type Mutation{
+
+#     xxxx
+
+# }
+
+# type Subscription{
+
+#     xxxx
+# }
