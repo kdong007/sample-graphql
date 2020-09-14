@@ -132,7 +132,7 @@ Apollo is the easier one to work with. https://www.apollographql.com/
 
 All remaining of this doc will be based on Apollo Graphql, it may or may be the same if you use Relay Graphql
 
-## Graphql Server
+## Graphql Server / Apollo Server
 
 When talking about a "Graphql Server", it can be:
 
@@ -140,4 +140,16 @@ When talking about a "Graphql Server", it can be:
 -   a REST server that has multiple graphql handlers on different endpoints
 -   a REST server that has one more graphql handler(s) and normal REST endpoints/handlers
 
-## Graphql Client
+## Graphql Client / Apollo Client
+
+TODO
+
+## Schema Versioning
+
+TODO
+
+## Analytics / [Apollo-Studio](https://studio.apollographql.com/)
+
+_Apollo-Studio was called Apollo-Engine before_
+
+TODO
