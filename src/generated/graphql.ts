@@ -1,6 +1,8 @@
 import { GraphQLResolveInfo } from 'graphql';
+import { StudentDoc } from '../data';
 export type Maybe<T> = T | null;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
+export type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
 export type RequireFields<T, K extends keyof T> = { [X in Exclude<keyof T, K>]?: T[X] } & { [P in K]-?: NonNullable<T[P]> };
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
@@ -230,16 +232,16 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 export type ResolversTypes = ResolversObject<{
   Name: ResolverTypeWrapper<Partial<Name>>;
   String: ResolverTypeWrapper<Partial<Scalars['String']>>;
-  Student: ResolverTypeWrapper<Partial<Student>>;
+  Student: ResolverTypeWrapper<StudentDoc>;
   ID: ResolverTypeWrapper<Partial<Scalars['ID']>>;
-  Course: ResolverTypeWrapper<Partial<Course>>;
+  Course: ResolverTypeWrapper<Partial<Omit<Course, 'students'> & { students: Array<ResolversTypes['Student']> }>>;
   Query: ResolverTypeWrapper<{}>;
-  StudentResult: ResolverTypeWrapper<Partial<StudentResult>>;
+  StudentResult: ResolverTypeWrapper<Partial<Omit<StudentResult, 'student'> & { student?: Maybe<ResolversTypes['Student']> }>>;
   Boolean: ResolverTypeWrapper<Partial<Scalars['Boolean']>>;
   AddStudentInput: ResolverTypeWrapper<Partial<AddStudentInput>>;
   EditStudentInput: ResolverTypeWrapper<Partial<EditStudentInput>>;
-  StudentEnrollmentResult: ResolverTypeWrapper<Partial<StudentEnrollmentResult>>;
-  StudentFriendshipResult: ResolverTypeWrapper<Partial<StudentFriendshipResult>>;
+  StudentEnrollmentResult: ResolverTypeWrapper<Partial<Omit<StudentEnrollmentResult, 'student'> & { student?: Maybe<ResolversTypes['Student']> }>>;
+  StudentFriendshipResult: ResolverTypeWrapper<Partial<Omit<StudentFriendshipResult, 'students'> & { students?: Maybe<Array<ResolversTypes['Student']>> }>>;
   Mutation: ResolverTypeWrapper<{}>;
 }>;
 
@@ -247,16 +249,16 @@ export type ResolversTypes = ResolversObject<{
 export type ResolversParentTypes = ResolversObject<{
   Name: Partial<Name>;
   String: Partial<Scalars['String']>;
-  Student: Partial<Student>;
+  Student: StudentDoc;
   ID: Partial<Scalars['ID']>;
-  Course: Partial<Course>;
+  Course: Partial<Omit<Course, 'students'> & { students: Array<ResolversParentTypes['Student']> }>;
   Query: {};
-  StudentResult: Partial<StudentResult>;
+  StudentResult: Partial<Omit<StudentResult, 'student'> & { student?: Maybe<ResolversParentTypes['Student']> }>;
   Boolean: Partial<Scalars['Boolean']>;
   AddStudentInput: Partial<AddStudentInput>;
   EditStudentInput: Partial<EditStudentInput>;
-  StudentEnrollmentResult: Partial<StudentEnrollmentResult>;
-  StudentFriendshipResult: Partial<StudentFriendshipResult>;
+  StudentEnrollmentResult: Partial<Omit<StudentEnrollmentResult, 'student'> & { student?: Maybe<ResolversParentTypes['Student']> }>;
+  StudentFriendshipResult: Partial<Omit<StudentFriendshipResult, 'students'> & { students?: Maybe<Array<ResolversParentTypes['Student']>> }>;
   Mutation: {};
 }>;
 

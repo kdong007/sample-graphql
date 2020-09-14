@@ -6,6 +6,8 @@ generates:
     config:
       useIndexSignature: true
       defaultMapper: Partial<{T}>
+      mappers:
+        Student: ../data#StudentDoc
     plugins:
       - "typescript"
       - "typescript-resolvers"
