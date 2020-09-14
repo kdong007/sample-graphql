@@ -4,13 +4,20 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "dev": "nodemon src/server.ts"
+    "dev": "nodemon src/server.ts",
+    "codegen": "graphql-codegen --config codegen.yml"
   },
   "dependencies": {
     "apollo-server": "^2.17.0",
-    "graphql": "^15.3.0"
+    "graphql": "^15.3.0",
+    "lodash": "^4.17.20"
   },
   "devDependencies": {
+    "@graphql-codegen/cli": "1.17.8",
+    "@graphql-codegen/introspection": "1.17.8",
+    "@graphql-codegen/typescript": "1.17.8",
+    "@graphql-codegen/typescript-resolvers": "^1.17.9",
+    "@types/lodash": "^4.14.161",
     "@types/node": "^14.6.4",
     "nodemon": "^2.0.4",
     "typescript": "^4.0.2"

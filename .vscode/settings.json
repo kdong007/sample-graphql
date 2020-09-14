@@ -9,5 +9,6 @@
     "node_modules/": true,
     "*.lock": true,
     "*.log": true
-  }
+  },
+  "cSpell.words": ["codegen"]
 }
