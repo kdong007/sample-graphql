@@ -1,13 +1,14 @@
 {
   "compilerOptions": {
+    "target": "ESNext",
     "allowJs": true,
     "allowSyntheticDefaultImports": true,
     "resolveJsonModule": true,
+    "module": "CommonJS",
     "esModuleInterop": true,
     "outDir": "dist",
     "sourceMap": true,
     "experimentalDecorators": true,
-    "emitDecoratorMetadata": true,
-    "target": "es5"
+    "emitDecoratorMetadata": true
   }
 }
