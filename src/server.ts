@@ -1,13 +1,13 @@
-import { ApolloServer, gql } from "apollo-server";
-
+import { ApolloServer } from "apollo-server";
 import fs from "fs";
 import path from "path";
+import { Resolvers } from "./generated/graphql";
 
 const typeDefs = fs.readFileSync(path.join(__dirname, "schema.gql")).toString();
 
 //
 // A map of functions which return data for the schema.
-const resolvers = {
+const resolvers: Resolvers = {
     Name: {
         fullName: (name) => {
             const { firstName, lastName } = name;
