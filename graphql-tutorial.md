@@ -13,7 +13,51 @@ A really abstract way of thinking Graphql is: **Graphql is a REST endpoint handl
 
 _Just to be clear, it is not DB. I don't want to confuse you by mentioning SQL_
 
-## Review of REST
+## REST operations vs Graphql operations
+
+### REST
+
+**GET**: Send data with query strings
+
+-   ?a=xxx&b=xxx&c=xxx
+
+**POST/PUT/DELETE**: Send data with request body
+
+-   plain text
+-   form data
+-   xml
+-   JSON
+-   almost anything...
+
+All operations supports almost all kinds of response formats..
+
+### Graphql
+
+Assume Graphql handler running on `/graphql` endpoint
+
+**query** (readonly operations, like GET)
+
+POST http://www.yourserver.com/graphql
+
+with a JSON body:
+
+```
+{
+    "query": "query {...}"
+}
+```
+
+**mutation** (operations that can mutate server data, like POST/PUT/DELETE)
+
+POST http://www.yourserver.com/graphql
+
+with a JSON body:
+
+```
+{
+    "query": "mutation {...}" // the key is still "query"
+}
+```
 
 ## Benefits of Graphql
 
@@ -24,5 +68,11 @@ _Just to be clear, it is not DB. I don't want to confuse you by mentioning SQL_
 ## Graphql families
 
 ## Graphql Server
+
+When talking about a "Graphql Server", it can be:
+
+-   a REST server that has only one graphql handler on one endpoint
+-   a REST server that has multiple graphql handlers on different endpoints
+-   a REST server that has one more graphql handler(s) and normal REST endpoints/handlers
 
 ## Graphql Client
