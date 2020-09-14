@@ -1,31 +1,71 @@
 type Name {
-    firstName: String
-    lastName: String
-    fullName: String
+    firstName: String!
+    lastName: String!
+    fullName: String!
+}
+
+type Student {
+    id: ID!
+    name: Name!
+    courses: [Course!]!
+    friends: [Student!]!
+}
+
+type Course {
+    id: ID!
+    name: String!
+    students: [Student!]!
 }
 
 # root query, case sensitivy
 type Query {
+    ################## Student ############################
     """
-    root query operation
+    Search for mutiple students
+    (This comment will exist in Graphql Playground DOCS)
     """
-    hello: String
+    searchStudents(keyword: String): [Student!]!
 
     """
-    test
+    get student by ID
     """
-    time: String
+    student(id: ID!): Student
 
-    getName: Name
+    ################## Course ############################
+
+    """
+    Search for mutiple courses
+    (This comment will exist in Graphql Playground DOCS)
+    """
+    searchCourse(keyword: String): [Course!]!
+
+    """
+    get course by ID
+    """
+    course(id: ID!): Course
 }
 
-# type Mutation{
+type StudentResult {
+    success: Boolean!
+    error: String
+    student: Student
+}
 
-#     xxxx
+input AddStudentInput {
+    """
+    optional, autogenreate if null
+    """
+    id: ID
+    firstName: String!
+    lastName: String!
+}
 
-# }
+input EditStudentInput {
+    firstName: String
+    lastName: String
+}
 
-# type Subscription{
-
-#     xxxx
-# }
+type Mutation {
+    addStudent(student: AddStudentInput!): StudentResult!
+    editStudent(id: ID!, updates: EditStudentInput!): StudentResult!
+}

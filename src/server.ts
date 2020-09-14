@@ -15,20 +15,7 @@ const resolvers: Resolvers = {
             return firstName + "," + lastName;
         },
     },
-    Query: {
-        hello: () => "world",
-        time: () => {
-            console.log("time resolver");
-
-            return new Date().toString();
-        },
-        getName: () => {
-            return {
-                firstName: "sisi",
-                lastName: "Xu",
-            };
-        },
-    },
+    Query: {},
 };
 
 const server = new ApolloServer({
