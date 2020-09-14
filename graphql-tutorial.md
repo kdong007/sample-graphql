@@ -17,17 +17,20 @@ _Just to be clear, it is not DB. I don't want to confuse you by mentioning SQL_
 
 ### REST
 
-**GET**: Send data with query strings
+#### GET
 
--   ?a=xxx&b=xxx&c=xxx
+-   Send data with query strings
 
-**POST/PUT/DELETE**: Send data with request body
+    -   ?a=xxx&b=xxx&c=xxx
 
--   plain text
--   form data
--   xml
--   JSON
--   almost anything...
+#### POST/PUT/DELETE
+
+-   Send data with request body
+    -   plain text
+    -   form data
+    -   xml
+    -   JSON
+    -   almost anything...
 
 All operations supports almost all kinds of response formats..
 
@@ -35,7 +38,9 @@ All operations supports almost all kinds of response formats..
 
 Assume Graphql handler running on `/graphql` endpoint
 
-**query** (readonly operations, like GET)
+#### query
+
+-   readonly operations, like GET
 
 POST http://www.yourserver.com/graphql
 
@@ -47,7 +52,9 @@ with a JSON body:
 }
 ```
 
-**mutation** (operations that can mutate server data, like POST/PUT/DELETE)
+#### mutation
+
+-   operations that can mutate server data, like POST/PUT/DELETE
 
 POST http://www.yourserver.com/graphql
 
@@ -58,6 +65,12 @@ with a JSON body:
     "query": "mutation {...}" // the key is still "query"
 }
 ```
+
+#### subscription
+
+-   think this as registering event listener to server, mostly done though sockets.
+    -   [Subscription with Apollo Server](https://www.apollographql.com/docs/apollo-server/data/subscriptions/)
+    -   [Subscription with Apollo Client](https://www.apollographql.com/docs/react/data/subscriptions/)
 
 ## Benefits of Graphql
 
