@@ -3,6 +3,9 @@ schema: "./src/schema.gql"
 documents: null
 generates:
   src/generated/graphql.ts:
+    config:
+      useIndexSignature: true
+      defaultMapper: Partial<{T}>
     plugins:
       - "typescript"
       - "typescript-resolvers"

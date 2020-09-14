@@ -37,7 +37,7 @@ type Query {
     Search for mutiple courses
     (This comment will exist in Graphql Playground DOCS)
     """
-    searchCourse(keyword: String): [Course!]!
+    searchCourses(keyword: String): [Course!]!
 
     """
     get course by ID
@@ -47,7 +47,7 @@ type Query {
 
 type StudentResult {
     success: Boolean!
-    error: String
+    failureReason: String
     student: Student
 }
 
@@ -65,7 +65,25 @@ input EditStudentInput {
     lastName: String
 }
 
+type StudentEnrollmentResult {
+    success: Boolean!
+    failureReason: String
+    student: Student
+}
+
+type StudentFriendshipResult {
+    success: Boolean!
+    failureReason: String
+    students: [Student!]
+}
+
 type Mutation {
     addStudent(student: AddStudentInput!): StudentResult!
     editStudent(id: ID!, updates: EditStudentInput!): StudentResult!
+
+    enrollCourse(studentId: ID!, courseId: ID!): StudentEnrollmentResult!
+    dropCourse(studentId: ID!, courseId: ID!): StudentEnrollmentResult!
+
+    addFriend(student1: ID!, student2: ID!): StudentFriendshipResult!
+    unFriend(student1: ID!, student2: ID!): StudentFriendshipResult!
 }

@@ -46,7 +46,7 @@ export type Query = {
    * Search for mutiple courses
    * (This comment will exist in Graphql Playground DOCS)
    */
-  searchCourse: Array<Course>;
+  searchCourses: Array<Course>;
   /** get course by ID */
   course?: Maybe<Course>;
 };
@@ -62,7 +62,7 @@ export type QueryStudentArgs = {
 };
 
 
-export type QuerySearchCourseArgs = {
+export type QuerySearchCoursesArgs = {
   keyword?: Maybe<Scalars['String']>;
 };
 
@@ -74,7 +74,7 @@ export type QueryCourseArgs = {
 export type StudentResult = {
   __typename?: 'StudentResult';
   success: Scalars['Boolean'];
-  error?: Maybe<Scalars['String']>;
+  failureReason?: Maybe<Scalars['String']>;
   student?: Maybe<Student>;
 };
 
@@ -90,10 +90,28 @@ export type EditStudentInput = {
   lastName?: Maybe<Scalars['String']>;
 };
 
+export type StudentEnrollmentResult = {
+  __typename?: 'StudentEnrollmentResult';
+  success: Scalars['Boolean'];
+  failureReason?: Maybe<Scalars['String']>;
+  student?: Maybe<Student>;
+};
+
+export type StudentFriendshipResult = {
+  __typename?: 'StudentFriendshipResult';
+  success: Scalars['Boolean'];
+  failureReason?: Maybe<Scalars['String']>;
+  students?: Maybe<Array<Student>>;
+};
+
 export type Mutation = {
   __typename?: 'Mutation';
   addStudent: StudentResult;
   editStudent: StudentResult;
+  enrollCourse: StudentEnrollmentResult;
+  dropCourse: StudentEnrollmentResult;
+  addFriend: StudentFriendshipResult;
+  unFriend: StudentFriendshipResult;
 };
 
 
@@ -108,6 +126,31 @@ export type MutationEditStudentArgs = {
 };
 
 
+export type MutationEnrollCourseArgs = {
+  studentId: Scalars['ID'];
+  courseId: Scalars['ID'];
+};
+
+
+export type MutationDropCourseArgs = {
+  studentId: Scalars['ID'];
+  courseId: Scalars['ID'];
+};
+
+
+export type MutationAddFriendArgs = {
+  student1: Scalars['ID'];
+  student2: Scalars['ID'];
+};
+
+
+export type MutationUnFriendArgs = {
+  student1: Scalars['ID'];
+  student2: Scalars['ID'];
+};
+
+export type WithIndex<TObject> = TObject & Record<string, any>;
+export type ResolversObject<TObject> = WithIndex<TObject>;
 
 export type ResolverTypeWrapper<T> = Promise<T> | T;
 
@@ -184,84 +227,108 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 ) => TResult | Promise<TResult>;
 
 /** Mapping between all available schema types and the resolvers types */
-export type ResolversTypes = {
-  Name: ResolverTypeWrapper<Name>;
-  String: ResolverTypeWrapper<Scalars['String']>;
-  Student: ResolverTypeWrapper<Student>;
-  ID: ResolverTypeWrapper<Scalars['ID']>;
-  Course: ResolverTypeWrapper<Course>;
+export type ResolversTypes = ResolversObject<{
+  Name: ResolverTypeWrapper<Partial<Name>>;
+  String: ResolverTypeWrapper<Partial<Scalars['String']>>;
+  Student: ResolverTypeWrapper<Partial<Student>>;
+  ID: ResolverTypeWrapper<Partial<Scalars['ID']>>;
+  Course: ResolverTypeWrapper<Partial<Course>>;
   Query: ResolverTypeWrapper<{}>;
-  StudentResult: ResolverTypeWrapper<StudentResult>;
-  Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
-  AddStudentInput: AddStudentInput;
-  EditStudentInput: EditStudentInput;
+  StudentResult: ResolverTypeWrapper<Partial<StudentResult>>;
+  Boolean: ResolverTypeWrapper<Partial<Scalars['Boolean']>>;
+  AddStudentInput: ResolverTypeWrapper<Partial<AddStudentInput>>;
+  EditStudentInput: ResolverTypeWrapper<Partial<EditStudentInput>>;
+  StudentEnrollmentResult: ResolverTypeWrapper<Partial<StudentEnrollmentResult>>;
+  StudentFriendshipResult: ResolverTypeWrapper<Partial<StudentFriendshipResult>>;
   Mutation: ResolverTypeWrapper<{}>;
-};
+}>;
 
 /** Mapping between all available schema types and the resolvers parents */
-export type ResolversParentTypes = {
-  Name: Name;
-  String: Scalars['String'];
-  Student: Student;
-  ID: Scalars['ID'];
-  Course: Course;
+export type ResolversParentTypes = ResolversObject<{
+  Name: Partial<Name>;
+  String: Partial<Scalars['String']>;
+  Student: Partial<Student>;
+  ID: Partial<Scalars['ID']>;
+  Course: Partial<Course>;
   Query: {};
-  StudentResult: StudentResult;
-  Boolean: Scalars['Boolean'];
-  AddStudentInput: AddStudentInput;
-  EditStudentInput: EditStudentInput;
+  StudentResult: Partial<StudentResult>;
+  Boolean: Partial<Scalars['Boolean']>;
+  AddStudentInput: Partial<AddStudentInput>;
+  EditStudentInput: Partial<EditStudentInput>;
+  StudentEnrollmentResult: Partial<StudentEnrollmentResult>;
+  StudentFriendshipResult: Partial<StudentFriendshipResult>;
   Mutation: {};
-};
+}>;
 
-export type NameResolvers<ContextType = any, ParentType extends ResolversParentTypes['Name'] = ResolversParentTypes['Name']> = {
+export type NameResolvers<ContextType = any, ParentType extends ResolversParentTypes['Name'] = ResolversParentTypes['Name']> = ResolversObject<{
   firstName?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   lastName?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   fullName?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType>;
-};
+}>;
 
-export type StudentResolvers<ContextType = any, ParentType extends ResolversParentTypes['Student'] = ResolversParentTypes['Student']> = {
+export type StudentResolvers<ContextType = any, ParentType extends ResolversParentTypes['Student'] = ResolversParentTypes['Student']> = ResolversObject<{
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   name?: Resolver<ResolversTypes['Name'], ParentType, ContextType>;
   courses?: Resolver<Array<ResolversTypes['Course']>, ParentType, ContextType>;
   friends?: Resolver<Array<ResolversTypes['Student']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType>;
-};
+}>;
 
-export type CourseResolvers<ContextType = any, ParentType extends ResolversParentTypes['Course'] = ResolversParentTypes['Course']> = {
+export type CourseResolvers<ContextType = any, ParentType extends ResolversParentTypes['Course'] = ResolversParentTypes['Course']> = ResolversObject<{
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   students?: Resolver<Array<ResolversTypes['Student']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType>;
-};
+}>;
 
-export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
+export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = ResolversObject<{
   searchStudents?: Resolver<Array<ResolversTypes['Student']>, ParentType, ContextType, RequireFields<QuerySearchStudentsArgs, never>>;
   student?: Resolver<Maybe<ResolversTypes['Student']>, ParentType, ContextType, RequireFields<QueryStudentArgs, 'id'>>;
-  searchCourse?: Resolver<Array<ResolversTypes['Course']>, ParentType, ContextType, RequireFields<QuerySearchCourseArgs, never>>;
+  searchCourses?: Resolver<Array<ResolversTypes['Course']>, ParentType, ContextType, RequireFields<QuerySearchCoursesArgs, never>>;
   course?: Resolver<Maybe<ResolversTypes['Course']>, ParentType, ContextType, RequireFields<QueryCourseArgs, 'id'>>;
-};
+}>;
 
-export type StudentResultResolvers<ContextType = any, ParentType extends ResolversParentTypes['StudentResult'] = ResolversParentTypes['StudentResult']> = {
+export type StudentResultResolvers<ContextType = any, ParentType extends ResolversParentTypes['StudentResult'] = ResolversParentTypes['StudentResult']> = ResolversObject<{
   success?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
-  error?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  failureReason?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   student?: Resolver<Maybe<ResolversTypes['Student']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType>;
-};
+}>;
 
-export type MutationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
+export type StudentEnrollmentResultResolvers<ContextType = any, ParentType extends ResolversParentTypes['StudentEnrollmentResult'] = ResolversParentTypes['StudentEnrollmentResult']> = ResolversObject<{
+  success?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
+  failureReason?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  student?: Resolver<Maybe<ResolversTypes['Student']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType>;
+}>;
+
+export type StudentFriendshipResultResolvers<ContextType = any, ParentType extends ResolversParentTypes['StudentFriendshipResult'] = ResolversParentTypes['StudentFriendshipResult']> = ResolversObject<{
+  success?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
+  failureReason?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  students?: Resolver<Maybe<Array<ResolversTypes['Student']>>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType>;
+}>;
+
+export type MutationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = ResolversObject<{
   addStudent?: Resolver<ResolversTypes['StudentResult'], ParentType, ContextType, RequireFields<MutationAddStudentArgs, 'student'>>;
   editStudent?: Resolver<ResolversTypes['StudentResult'], ParentType, ContextType, RequireFields<MutationEditStudentArgs, 'id' | 'updates'>>;
-};
+  enrollCourse?: Resolver<ResolversTypes['StudentEnrollmentResult'], ParentType, ContextType, RequireFields<MutationEnrollCourseArgs, 'studentId' | 'courseId'>>;
+  dropCourse?: Resolver<ResolversTypes['StudentEnrollmentResult'], ParentType, ContextType, RequireFields<MutationDropCourseArgs, 'studentId' | 'courseId'>>;
+  addFriend?: Resolver<ResolversTypes['StudentFriendshipResult'], ParentType, ContextType, RequireFields<MutationAddFriendArgs, 'student1' | 'student2'>>;
+  unFriend?: Resolver<ResolversTypes['StudentFriendshipResult'], ParentType, ContextType, RequireFields<MutationUnFriendArgs, 'student1' | 'student2'>>;
+}>;
 
-export type Resolvers<ContextType = any> = {
+export type Resolvers<ContextType = any> = ResolversObject<{
   Name?: NameResolvers<ContextType>;
   Student?: StudentResolvers<ContextType>;
   Course?: CourseResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
   StudentResult?: StudentResultResolvers<ContextType>;
+  StudentEnrollmentResult?: StudentEnrollmentResultResolvers<ContextType>;
+  StudentFriendshipResult?: StudentFriendshipResultResolvers<ContextType>;
   Mutation?: MutationResolvers<ContextType>;
-};
+}>;
 
 
 /**

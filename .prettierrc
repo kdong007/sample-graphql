@@ -3,6 +3,7 @@
   "semi": true,
   "singleQuote": false,
   "trailingComma": "es5",
+  "arrowParens": "avoid",
   "overrides": [
     {
       "files": ["*.json", "*.yml", "*.**rc"],
