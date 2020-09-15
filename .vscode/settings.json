@@ -10,5 +10,8 @@
     "*.lock": true,
     "*.log": true
   },
-  "cSpell.words": ["codegen"]
+  "cSpell.words": [
+    "codegen",
+    "parens"
+  ]
 }
