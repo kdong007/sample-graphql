@@ -1,10 +1,11 @@
 {
   "compilerOptions": {
-    "target": "ESNext",
+    "lib": ["ES2019"],
+    "module": "commonjs",
+    "target": "ES2019",
     "allowJs": true,
     "allowSyntheticDefaultImports": true,
     "resolveJsonModule": true,
-    "module": "CommonJS",
     "esModuleInterop": true,
     "outDir": "dist",
     "sourceMap": true,
