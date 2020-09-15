@@ -145,7 +145,7 @@ Apollo is the easier one to work with. https://www.apollographql.com/
 
 All remaining of this doc will be based on Apollo Graphql, it may or may be the same if you use Relay Graphql
 
-## Graphql Server / Apollo Server
+## Work with Graphql Server
 
 When talking about a "Graphql Server", it can be:
 
@@ -165,6 +165,48 @@ Usually Graphql server will host one in-browser IDE in dev environment.
 
 For example, if you spin up my [sample graphql server](https://github.com/kdong007/sample-graphql), you can open up http://localhost:4000/ and see a Graphql Playground.
 Click on "DOCS" or "SCHEMA" to the right to view the schema definitions.
+
+## Understand the nodes
+
+Take quick tour of [Graphql official introduction](https://graphql.org/learn/) first
+
+In Graphql world, we usually define things based on resources, and resources are "linked". Some people say it's "graph", some people say it's more like "tree". I personally think the relationships are like "multi rooted tree with cycles in intermediate nodes".
+
+Here is an illustration of flows on querying or designing your schema:
+
+![Graphql nodes](graphql-notes.png)
+
+First, you start with one of three type of operations,
+
+-   query
+-   mutation
+-   subscription
+
+Then you go into the root operations of each type. For example, here is how "query" is defined in sample project:
+
+```
+type Query {
+    searchStudents(keyword: String): [Student!]!
+    student(id: ID!): Student
+
+    searchCourses(keyword: String): [Course!]!
+    course(id: ID!): Course
+}
+```
+
+_Think this part like REST endpoints_
+
+After "root operations", you move down to the intermediate node, which are resources on your server side that are all chained up. Eventually all of your path have to move down to the leaf nodes, the "scalar types".
+
+Note only the "intermediate nodes" are bi-directional and that's the only "graphql" part.
+
+## Write Graphql operations
+
+TODO
+
+## Design schema
+
+TODO
 
 ## Graphql Client / Apollo Client
 
