@@ -153,6 +153,19 @@ When talking about a "Graphql Server", it can be:
 -   a REST server that has multiple graphql handlers on different endpoints
 -   a REST server that has one more graphql handler(s) and normal REST endpoints/handlers
 
+When you are introduced to a running Graphql server, the first thing you should do I to find the data schema, which can be done in two ways:
+
+-   Read though schema definition files if you have access to the code base
+-   Use Graphql IDEs like:
+    -   Graphql Playground
+    -   Graphiql
+    -   [Postman](https://www.postman.com/graphql/), (yes, it supports Graphql now)
+
+Usually Graphql server will host one in-browser IDE in dev environment.
+
+For example, if you spin up my [sample graphql server](https://github.com/kdong007/sample-graphql), you can open up http://localhost:4000/ and see a Graphql Playground.
+Click on "DOCS" or "SCHEMA" to the right to view the schema definitions.
+
 ## Graphql Client / Apollo Client
 
 TODO
