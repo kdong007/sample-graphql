@@ -1,6 +1,6 @@
 overwrite: true
 schema: "./src/schema.gql"
-documents: null
+documents: "./test/test.ts"
 generates:
   src/generated/graphql.ts:
     config:
@@ -9,5 +9,7 @@ generates:
       mappers:
         Student: ../data#StudentDoc
     plugins:
-      - "typescript"
-      - "typescript-resolvers"
+      - typescript
+      - typescript-resolvers
+      - typescript-operations
+      - typed-document-node

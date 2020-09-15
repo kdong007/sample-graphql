@@ -4,7 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "dev": "concurrently \"yarn codegen --watch\" \"nodemon src/server.ts\"",
+    "dev": "concurrently \"yarn codegen --watch\" \"nodemon src/index.ts\"",
     "codegen": "graphql-codegen --config codegen.yml",
     "test": "jest"
   },
@@ -16,11 +16,14 @@
   "devDependencies": {
     "@graphql-codegen/cli": "1.17.8",
     "@graphql-codegen/introspection": "1.17.8",
+    "@graphql-codegen/typed-document-node": "^1.17.9",
     "@graphql-codegen/typescript": "1.17.8",
+    "@graphql-codegen/typescript-operations": "^1.17.8",
     "@graphql-codegen/typescript-resolvers": "^1.17.9",
     "@types/jest": "^26.0.13",
     "@types/lodash": "^4.14.161",
     "@types/node": "^14.6.4",
+    "apollo-server-testing": "^2.17.0",
     "concurrently": "^5.3.0",
     "jest": "^26.4.2",
     "nodemon": "^2.0.4",
