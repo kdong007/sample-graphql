@@ -5,7 +5,8 @@
   "license": "MIT",
   "scripts": {
     "dev": "concurrently \"yarn codegen --watch\" \"nodemon src/server.ts\"",
-    "codegen": "graphql-codegen --config codegen.yml"
+    "codegen": "graphql-codegen --config codegen.yml",
+    "test": "jest"
   },
   "dependencies": {
     "apollo-server": "^2.17.0",
