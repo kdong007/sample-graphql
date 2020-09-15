@@ -202,7 +202,12 @@ Note only the "intermediate nodes" are bi-directional and that's the only "graph
 
 ## Write Graphql operations
 
-TODO
+TODO - Syntax, Grammar, Variables...
+
+Rules to keep in mind:
+
+-   No empty brackets
+-   Expand all nodes to scalar types
 
 ## Design schema
 
