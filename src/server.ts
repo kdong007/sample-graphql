@@ -23,7 +23,9 @@ import {
     friendships,
 } from "./data";
 
-const typeDefs = fs.readFileSync(path.join(__dirname, "schema.gql")).toString();
+const typeDefs = fs
+    .readFileSync(path.join(__dirname, "schema.graphql"))
+    .toString();
 
 // A map of functions which return data for the schema.
 const resolvers: Resolvers = {
