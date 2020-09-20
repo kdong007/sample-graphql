@@ -1,0 +1,2 @@
+schema: "./src/schema.ggl"
+documents: "src/**/*.{graphql,js,ts,jsx,tsx}"
