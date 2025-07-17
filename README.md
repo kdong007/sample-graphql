@@ -129,6 +129,7 @@ fetch("<your-server-address>", {
 
 -   Postman
 -   GraphiQL / GraphQL Playground
+    -   Usually comes with Graphql server framework, like Postgres' native IDE
 -   Apollo DevTools (Browser extension)
 
 ---
