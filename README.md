@@ -172,10 +172,38 @@ fetch("<your-server-address>", {
 -   Clients request **only** needed fields
 -   Reduces over-fetching
 
-### ✅ Simplified API Design
+### ✅ Reduced Frontend/Backend Communication Overhead
 
--   Fewer endpoints
--   Easier Frontend/Backend collaboration
+-   **Self-serve data fetching for frontend**:
+    -   Frontend developers can define exactly what data they need via GraphQL queries without waiting for backend developers to create or modify specific REST endpoints.
+-   **Flexible response shaping**:
+
+    -   Unlike REST, where the response shape is fixed per endpoint, GraphQL allows frontend to shape the response directly in the query. No more back-and-forth requests to “add a field” or “remove a nested relation.”
+
+-   **Avoid multiple backend iterations for UI changes**:
+
+    -   Example:
+        -   Traditional REST approach:
+            -   Backend exposes `/product`, `/vendor`, `/order` endpoints.
+            -   Frontend builds a dashboard page requiring data from multiple endpoints.
+            -   Backend needs to create a `/dashboard` endpoint to combine data for performance optimization.
+            -   Any dashboard changes = more backend work.
+        -   GraphQL approach:
+            -   Frontend simply writes a single query pulling `product`, `vendor`, `order` in one request.
+            -   Backend remains unchanged as long as the schema supports the required fields.
+
+-   **Fewer alignment meetings between teams**:
+
+    -   Reduces typical cycles of:
+        1. Frontend asks for an endpoint.
+        2. Backend implements it.
+        3. Frontend realizes extra fields are needed.
+        4. Backend modifies again.
+    -   With GraphQL, **schema evolves independently**, and frontend can iterate faster without constant backend adjustments.
+
+-   **Cleaner separation of concerns**:
+    -   Backend focuses on **business logic and data modeling**.
+    -   Frontend focuses on **UI and data composition**.
 
 ### ✅ Apollo Client Perks
 
@@ -183,6 +211,14 @@ fetch("<your-server-address>", {
 -   Loading/Error states
 -   Pagination & Infinite Scroll (FetchMore)
 -   Reactive UI binding (Redux-like experience)
+
+### ✅ Normalized Client-Side Caching
+
+-   **Automatic cache normalization**:
+    -   Shared resources (e.g., `student(id: "123")`) across multiple queries and views are **de-duplicated** in the cache.
+    -   When a resource is updated (e.g., via a `mutation`), all queries and UI components referencing the same resource ID will automatically reflect the updated data without requiring manual refresh or additional requests.
+-   **Reduced redundant network requests**:
+    -   GraphQL clients like Apollo avoid unnecessary requests by serving data directly from the cache if it’s already available, reducing server load and improving performance.
 
 ---
 
