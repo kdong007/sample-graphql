@@ -17,11 +17,11 @@ type Course {
     students: [Student!]!
 }
 
-# root query, case sensitivy
+# root query, case sensitive
 type Query {
     ################## Student ############################
     """
-    Search for mutiple students
+    Search for multiple students
     (This comment will exist in Graphql Playground DOCS)
     """
     searchStudents(keyword: String): [Student!]!
@@ -34,7 +34,7 @@ type Query {
     ################## Course ############################
 
     """
-    Search for mutiple courses
+    Search for multiple courses
     (This comment will exist in Graphql Playground DOCS)
     """
     searchCourses(keyword: String): [Course!]!
@@ -53,7 +53,7 @@ type StudentResult {
 
 input AddStudentInput {
     """
-    optional, autogenreate if null
+    optional, autogenerate if null
     """
     id: ID
     firstName: String!
